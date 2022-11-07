@@ -1,31 +1,33 @@
 import config from "../config.json";
 import styled from "styled-components";
-import { CSSReset } from "../src/components/CSSReset"
+import { CSSReset } from "../src/components/CSSReset";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
-import bannerImg  from "../src/images/youtube-banner-templates-header-wide.jpg";
-
+import bannerImg from "../src/images/youtube-banner-templates-header-wide.jpg";
+import Favorites from "../src/components/Favorites";
 
 function HomePage() {
   return (
     <>
-        <CSSReset />
-      <div style={{
-                display: "flex",
-                flexDirection: "column",
-                flex: 1,
-                // backgroundColor: "red",
-            }}>
-      <Menu />
-      <Header />
-      <Timeline playlists={config.playlists} />
-    </div>
+      <CSSReset />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          // backgroundColor: "red",
+        }}
+      >
+        <Menu />
+        <Header />
+        <Timeline playlists={config.playlists} />
+        <Favorites favorites={config.favorites} />
+      </div>
     </>
   );
 }
 
 export default HomePage;
-
 
 const StyledHeader = styled.div`
   img {
@@ -48,7 +50,6 @@ const StyledHeader = styled.div`
   }
 `;
 function Header() {
-  console.log(bannerImg);
   return (
     <StyledHeader>
       <img className="banner-img" src={bannerImg.src} />
@@ -80,11 +81,11 @@ function Timeline(props) {
                     <img src={video.thumb} alt={video.title} />
                     <span>{video.title}</span>
                   </a>
-                )
+                );
               })}
             </div>
           </section>
-        )
+        );
       })}
     </StyledTimeline>
   );

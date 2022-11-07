@@ -2,6 +2,22 @@
   "name": "Lutiero Pedroso Fabri",
   "job": "Student",
   "github": "lutiero",
+  "favorites": {
+    "users": [
+      {
+        "username": "Lutiero",
+        "avatar": "lutiero"
+      },
+      {
+        "username": "keizo13",
+        "avatar": "keizo13"
+      },
+      {
+        "username": "lscarvalhoo",
+        "avatar": "lscarvalhoo"
+      }
+    ]
+  },
   "playlists": {
     "jogos": [
       {
