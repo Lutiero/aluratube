@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { CSSReset } from "../src/components/CSSReset"
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
-
+import bannerImg  from "../src/images/youtube-banner-templates-header-wide.jpg";
 
 
 function HomePage() {
@@ -34,18 +34,24 @@ const StyledHeader = styled.div`
     border-radius: 50%;
   }
   .user-info {
-    margin-top: 50px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     width: 100%;
     padding: 16px 32px;
     gap: 16px;
   }
+  .banner-img {
+    border-radius: 0;
+    width: 100%;
+    height: 423px;
+  }
 `;
 function Header() {
+  console.log(bannerImg);
   return (
     <StyledHeader>
-      {/* <img src="./" alt="banner" /> */}
+      <img className="banner-img" src={bannerImg.src} />
       <section className="user-info">
         <img src={`https://github.com/${config.github}.png`} alt="profile" />
         <div>
