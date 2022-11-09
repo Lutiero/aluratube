@@ -1,12 +1,14 @@
+import React, { useState } from "react";
 import config from "../config.json";
 import styled from "styled-components";
 import { CSSReset } from "../src/components/CSSReset";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
-import bannerImg from "../src/images/youtube-banner-templates-header-wide.jpg";
 import Favorites from "../src/components/Favorites";
 
 function HomePage() {
+  const [valorDoFiltro, setValorDoFiltro] = useState('');
+
   return (
     <>
       <CSSReset />
@@ -15,12 +17,14 @@ function HomePage() {
           display: "flex",
           flexDirection: "column",
           flex: 1,
-          // backgroundColor: "red",
         }}
       >
-        <Menu />
+        <Menu
+          valorDoFiltro={valorDoFiltro}
+          setValorDoFiltro={setValorDoFiltro}
+        />
         <Header />
-        <Timeline playlists={config.playlists} />
+        <Timeline searchedValue={valorDoFiltro} playlists={config.playlists} />
         <Favorites favorites={config.favorites} />
       </div>
     </>
@@ -36,7 +40,6 @@ const StyledHeader = styled.div`
     border-radius: 50%;
   }
   .user-info {
-    margin-top: 20px;
     display: flex;
     align-items: center;
     width: 100%;
@@ -52,12 +55,21 @@ const StyledHeader = styled.div`
     margin-top: 50px;
   }
 `;
+
+const StyledBanner = styled.div`
+  background-image: url(${({bg}) => bg});
+  height: 230px;
+`;
 function Header() {
   return (
     <StyledHeader>
-      <img className="banner-img" src={bannerImg.src} />
+      <StyledBanner bg={config.bg} />
       <section className="user-info">
-        <img className="user-avatar" src={`https://github.com/${config.github}.png`} alt="profile" />
+        <img
+          className="user-avatar"
+          src={`https://github.com/${config.github}.png`}
+          alt="profile"
+        />
         <div>
           <h2>{config.name}</h2>
           <p>{config.job}</p>
@@ -67,7 +79,7 @@ function Header() {
   );
 }
 
-function Timeline(props) {
+function Timeline({ searchedValue, ...props }) {
   const playlistsNames = Object.keys(props.playlists);
 
   return (
@@ -75,17 +87,23 @@ function Timeline(props) {
       {playlistsNames.map((playlistName) => {
         const videos = props.playlists[playlistName];
         return (
-          <section>
+          <section key={playlistName}>
             <h2>{playlistName}</h2>
             <div>
-              {videos.map((video) => {
-                return (
-                  <a href={video.url}>
-                    <img src={video.thumb} alt={video.title} />
-                    <span>{video.title}</span>
-                  </a>
-                );
-              })}
+              {videos
+                .filter((video) => {
+                  const titleNormalize = video.title.toLowerCase();
+                  const searchedValueNormalize = searchedValue.toLowerCase();
+                  return titleNormalize.includes(searchedValueNormalize);
+                })
+                .map((video) => {
+                  return (
+                    <a key={video.url} href={video.url}>
+                      <img src={video.thumb} alt={video.title} />
+                      <span>{video.title}</span>
+                    </a>
+                  );
+                })}
             </div>
           </section>
         );
