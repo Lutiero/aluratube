@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import config from "../config.json";
 import styled from "styled-components";
-import { CSSReset } from "../src/components/CSSReset";
 import Menu from "../src/components/Menu";
 import { StyledTimeline } from "../src/components/Timeline";
 import Favorites from "../src/components/Favorites";
@@ -11,7 +10,7 @@ function HomePage() {
 
   return (
     <>
-      <CSSReset />
+      
       <div
         style={{
           display: "flex",
@@ -34,6 +33,8 @@ function HomePage() {
 export default HomePage;
 
 const StyledHeader = styled.div`
+  background-color: ${({ theme }) => theme.backgroundLevel1} ;
+
   .user-avatar {
     width: 80px;
     height: 80px;
@@ -57,7 +58,7 @@ const StyledHeader = styled.div`
 `;
 
 const StyledBanner = styled.div`
-  background-image: url(${({bg}) => bg});
+  background-image: url(${({bg, ...restante}) => bg });
   height: 230px;
 `;
 function Header() {

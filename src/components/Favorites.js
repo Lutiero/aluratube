@@ -20,8 +20,8 @@ const StyledFavorites = styled.section`
     margin-bottom: 5px;
   }
 
-.favorite-name {
-    font-weight: bold;
+  .favorite-name {
+    font-weight: 300;
   }
 
   h2 {
@@ -31,12 +31,12 @@ const StyledFavorites = styled.section`
 
   a {
     text-decoration: none;
+    color: black;
   }
 
   a:visited {
     color: black;
   }
-
 `;
 
 export default function Favorites(props) {
@@ -51,7 +51,10 @@ export default function Favorites(props) {
             <div className="favorite-container">
               {users.map((user) => {
                 return (
-                  <a href={`https://github.com/${user.username}`} target="_blank">
+                  <a
+                    href={`https://github.com/${user.username}`}
+                    target="_blank"
+                  >
                     <div className="favorite-info">
                       <img
                         src={`https://github.com/${user.avatar}.png`}
