@@ -46,12 +46,12 @@ export default function Favorites(props) {
       {favoriteUsers.map((favorite) => {
         const users = props.favorites[favorite];
         return (
-          <section>
+          <section key={users}>
             <h2>Favoritos do Github</h2>
             <div className="favorite-container">
               {users.map((user) => {
                 return (
-                  <a
+                  <a key={user.username}
                     href={`https://github.com/${user.username}`}
                     target="_blank"
                   >
